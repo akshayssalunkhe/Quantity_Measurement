@@ -30,6 +30,18 @@ public class QuantityMeasurement {
         return yard = (feet * 1 / 3);
     }
 
+    //METHOD TO CONVERT INCH VALUE IN YARD
+    public double returnValueInYardForInch(double inch) {
+        double yard;
+        return yard = (inch * 1 / 36);
+    }
+
+    //METHOD TO CONVERT YARD VALUE IN INCHES
+    public double returnValueInInchForYard(double yard) {
+        double inches;
+        return inches = (yard * 36);
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null)
