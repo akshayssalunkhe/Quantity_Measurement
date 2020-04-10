@@ -92,4 +92,13 @@ public class QuantityMeasurementTest {
         double feetValue = quantityMeasurement.returnValueInFeet(24);
         Assert.assertEquals(2, feetValue, 0.0);
     }
+<<<<<<< HEAD
+=======
+
+    @Test
+    public void givenValueInFeet_ShouldReturnValueInYard() {
+        double yardValue = quantityMeasurement.returnValueInYard(3);
+        Assert.assertEquals(1, yardValue, 0.0);
+    }
+>>>>>>> UC_2_CompareFeetAndYard
 }
