@@ -7,6 +7,11 @@ public class QuantityMeasurement {
         return feet;
     }
 
+    //METHOD TO RETURN INCH VALUE
+    public double returnInches(double inch) {
+        return inch;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null)
