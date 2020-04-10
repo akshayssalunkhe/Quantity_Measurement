@@ -1,5 +1,6 @@
 package com.bridgelabz;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -78,5 +79,17 @@ public class QuantityMeasurementTest {
         double value1 = quantityMeasurement.returnInches(2.2);
         double value2 = quantityMeasurement.returnInches(2.2);
         assertEquals(value1, value2, 0.0);
+    }
+
+    @Test
+    public void givenValueInFeet_ShouldReturnValueInInches() {
+        double inchValue = quantityMeasurement.returnValueInInches(1);
+        Assert.assertEquals(12, inchValue, 0.0);
+    }
+
+    @Test
+    public void givenValueInInch_ShouldReturnValeInFeet() {
+        double feetValue = quantityMeasurement.returnValueInFeet(24);
+        Assert.assertEquals(2, feetValue, 0.0);
     }
 }
