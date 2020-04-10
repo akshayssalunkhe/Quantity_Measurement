@@ -3,8 +3,7 @@ package com.bridgelabz;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class QuantityMeasurementTest {
 
@@ -97,5 +96,29 @@ public class QuantityMeasurementTest {
     public void givenValueInFeet_ShouldReturnValueInYard() {
         double yardValue = quantityMeasurement.returnValueInYard(3);
         Assert.assertEquals(1, yardValue, 0.0);
+    }
+
+    @Test
+    public void givenValueInOneFeet_NotEqualToOneYard_ShouldReturnTrue() {
+        double yardValue = quantityMeasurement.returnValueInYard(1);
+        Assert.assertEquals(0.3333333333333333, yardValue, 0.0);
+    }
+
+    @Test
+    public void givenValueInInch_ShouldReturnValueInYard() {
+        double yardValue = quantityMeasurement.returnValueInYardForInch(36);
+        Assert.assertEquals(1, yardValue, 0.0);
+    }
+
+    @Test
+    public void givenValueOneInch_IfNotEqualToOneYardShouldReturnTrue() {
+        double yardValue = quantityMeasurement.returnValueInYardForInch(1);
+        Assert.assertEquals(0.027777777777777776, yardValue, 0.0);
+    }
+
+    @Test
+    public void givenValueYard_ShouldReturnValueInInches() {
+        double yardValue = quantityMeasurement.returnValueInInchForYard(1);
+        Assert.assertEquals(36, yardValue, 0.0);
     }
 }
