@@ -24,15 +24,12 @@ public class QuantityMeasurement {
         return feet = (inchValue * 1 / 12);
     }
 
-<<<<<<< HEAD
-=======
     //METHOD TO CONVERT FEET VALUE IN YARD
     public double returnValueInYard(double feet) {
         double yard;
         return yard = (feet * 1 / 3);
     }
 
->>>>>>> UC_2_CompareFeetAndYard
     @Override
     public boolean equals(Object obj) {
         if (obj == null)
