@@ -12,6 +12,18 @@ public class QuantityMeasurement {
         return inch;
     }
 
+    //METHOD TO CONVERT FEET VALUE IN INCHES
+    public double returnValueInInches(double feetValue) {
+        double inches;
+        return inches = (feetValue * 12);
+    }
+
+    //METHOD TO CONVERT INCH VALUE IN FEET
+    public double returnValueInFeet(double inchValue) {
+        double feet;
+        return feet = (inchValue * 1 / 12);
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null)
