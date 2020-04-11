@@ -4,6 +4,9 @@ public class QuantityMeasurement {
 
     //METHOD TO RETURN CONVERTED VALUE
     public double returnConversionValue(double valueToConvert, Unit unitToConvert) {
+        if (unitToConvert.equals(Unit.CELSIUS)) {
+            return ((unitToConvert.type * valueToConvert) + 32);
+        }
         return (valueToConvert * unitToConvert.type);
     }
 
