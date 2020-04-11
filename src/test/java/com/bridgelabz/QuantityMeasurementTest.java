@@ -213,4 +213,24 @@ public class QuantityMeasurementTest {
         double additionResult = quantityMeasurement.additionOfQuantity(millilitreValue, litreValue);
         Assert.assertEquals(2, additionResult, 0);
     }
+
+    @Test
+    public void givenValue1000Grams_ShouldReturnEquivalentKilogramValue() {
+        double kilogramValue = quantityMeasurement.returnConversionValue(1000, Unit.GRAM);
+        Assert.assertEquals(1, kilogramValue, 0.0);
+    }
+
+    @Test
+    public void givenValue1Tonne_ShouldReturnEquivalentKilogramValue() {
+        double kilogramValue = quantityMeasurement.returnConversionValue(1, Unit.TONNE);
+        Assert.assertEquals(1000, kilogramValue, 0.0);
+    }
+
+    @Test
+    public void givenValueInTonneAndGram_WhenAdded_ShouldReturnEquivalentKilogramValue() {
+        double tonneValue = quantityMeasurement.returnConversionValue(1, Unit.TONNE);
+        double gramValue = quantityMeasurement.returnConversionValue(1000, Unit.GRAM);
+        double additionResult = quantityMeasurement.additionOfQuantity(tonneValue, gramValue);
+        Assert.assertEquals(1001, additionResult, 0);
+    }
 }
