@@ -197,4 +197,20 @@ public class QuantityMeasurementTest {
         double LitreValue = quantityMeasurement.returnConversionValue(2000, Unit.MILLILITRE);
         Assert.assertEquals(2, LitreValue, 0.0);
     }
+
+    @Test
+    public void givenValueInGallonAndLitre_WhenAdded_ShouldReturnValueInLitre() {
+        double gallonValue = quantityMeasurement.returnConversionValue(1, Unit.GALLON);
+        double litreValue = quantityMeasurement.returnConversionValue(3.78, Unit.LITRE);
+        double additionResult = quantityMeasurement.additionOfQuantity(gallonValue, litreValue);
+        Assert.assertEquals(7.56, additionResult, 0);
+    }
+
+    @Test
+    public void givenValueInLitreAndMillilitre_WhenAdded_ShouldReturnValueInLitre() {
+        double millilitreValue = quantityMeasurement.returnConversionValue(1000, Unit.MILLILITRE);
+        double litreValue = quantityMeasurement.returnConversionValue(1, Unit.LITRE);
+        double additionResult = quantityMeasurement.additionOfQuantity(millilitreValue, litreValue);
+        Assert.assertEquals(2, additionResult, 0);
+    }
 }
