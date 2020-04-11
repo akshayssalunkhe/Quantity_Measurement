@@ -233,4 +233,31 @@ public class QuantityMeasurementTest {
         double additionResult = quantityMeasurement.additionOfQuantity(tonneValue, gramValue);
         Assert.assertEquals(1001, additionResult, 0);
     }
+
+    @Test
+    public void givenValueTemperature0_WhenCompare_ShouldReturnEqual() {
+        double temperatureOne = quantityMeasurement.returnConversionValue(0, Unit.CELSIUS);
+        double temperatureTwo = quantityMeasurement.returnConversionValue(0, Unit.CELSIUS);
+        Assert.assertEquals(temperatureOne, temperatureTwo, 0);
+    }
+
+    @Test
+    public void givenTemperature_WhenCompare_ShouldReturnEqual() {
+        double temperatureOne = quantityMeasurement.returnConversionValue(212, Unit.FAHRENHEIT);
+        double temperatureTwo = quantityMeasurement.returnConversionValue(100, Unit.CELSIUS);
+        Assert.assertEquals(temperatureOne, temperatureTwo, 0);
+    }
+
+    @Test
+    public void givenTemperature0CelsiusAnd0Fahrenheit_whenEquate_ShouldReturnNotEqual() {
+        double temperatureValueOne = quantityMeasurement.returnConversionValue(0, Unit.CELSIUS);
+        double temperatureValueTwo = quantityMeasurement.returnConversionValue(0, Unit.FAHRENHEIT);
+        Assert.assertNotEquals(temperatureValueTwo, temperatureValueOne, 0);
+    }
+
+    @Test
+    public void givenTemperatureInFahrenheit_ShouldReturnEquivalentTemperatureInFahrenheit() {
+        double temperatureValue = quantityMeasurement.returnConversionValue(35, Unit.FAHRENHEIT);
+        Assert.assertEquals(35, temperatureValue, 0);
+    }
 }
