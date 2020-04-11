@@ -141,4 +141,36 @@ public class QuantityMeasurementTest {
         double centimeterValue = quantityMeasurement.returnConversionValue(5, Unit.CENTIMETER);
         Assert.assertEquals(inchValue, centimeterValue, 0.0);
     }
+
+    @Test
+    public void given2InchAnd2Inch_WhenAdded_ShouldReturn4Inch() {
+        double inchValueOne = quantityMeasurement.returnConversionValue(2, Unit.INCH);
+        double inchValueTwo = quantityMeasurement.returnConversionValue(2, Unit.INCH);
+        double additionResult = quantityMeasurement.additionOfQuantity(inchValueOne, inchValueTwo);
+        Assert.assertEquals(4, additionResult, 0);
+    }
+
+    @Test
+    public void given1FeetAnd2Inch_WhenAdded_ShouldReturn14Inch() {
+        double feetValue = quantityMeasurement.returnConversionValue(1, Unit.FEET);
+        double inchValue = quantityMeasurement.returnConversionValue(2, Unit.INCH);
+        double additionResult = quantityMeasurement.additionOfQuantity(feetValue, inchValue);
+        Assert.assertEquals(14, additionResult, 0);
+    }
+
+    @Test
+    public void given1FeetAnd1Feet_WhenAdded_ShouldReturn24Inch() {
+        double feetValueOne = quantityMeasurement.returnConversionValue(1, Unit.FEET);
+        double feetValueTwo = quantityMeasurement.returnConversionValue(1, Unit.FEET);
+        double additionResult = quantityMeasurement.additionOfQuantity(feetValueOne, feetValueTwo);
+        Assert.assertEquals(24, additionResult, 0);
+    }
+
+    @Test
+    public void givenInchValueAndCentimeterValue_WhenAdded_ShouldReturnResultInInches() {
+        double inchValue = quantityMeasurement.returnConversionValue(2, Unit.INCH);
+        double centimeterValue = quantityMeasurement.returnConversionValue(2.5, Unit.CENTIMETER);
+        double additionResult = quantityMeasurement.additionOfQuantity(inchValue, centimeterValue);
+        Assert.assertEquals(3, additionResult, 0);
+    }
 }
