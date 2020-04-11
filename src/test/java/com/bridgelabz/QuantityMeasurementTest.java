@@ -173,4 +173,28 @@ public class QuantityMeasurementTest {
         double additionResult = quantityMeasurement.additionOfQuantity(inchValue, centimeterValue);
         Assert.assertEquals(3, additionResult, 0);
     }
+
+    @Test
+    public void givenValueOneGallon_ShouldReturnEquivalentLitreValue() {
+        double litreValue = quantityMeasurement.returnConversionValue(1, Unit.GALLON);
+        Assert.assertEquals(3.78, litreValue, 0.0);
+    }
+
+    @Test
+    public void givenValueOneLitre_ShouldReturnEquivalentLitreValue() {
+        double litreValue = quantityMeasurement.returnConversionValue(1, Unit.LITRE);
+        Assert.assertEquals(1, litreValue, 0.0);
+    }
+
+    @Test
+    public void givenValueOneMillilitre_ShouldReturnEquivalentLitreValue() {
+        double litreValue = quantityMeasurement.returnConversionValue(1000, Unit.MILLILITRE);
+        Assert.assertEquals(1, litreValue, 0.0);
+    }
+
+    @Test
+    public void givenValueMillilitre_ShouldReturnEquivalentLitreValue() {
+        double LitreValue = quantityMeasurement.returnConversionValue(2000, Unit.MILLILITRE);
+        Assert.assertEquals(2, LitreValue, 0.0);
+    }
 }
