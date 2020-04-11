@@ -17,4 +17,9 @@ public class QuantityMeasurement {
             return true;
         return super.equals(obj);
     }
+
+    //METHOD TO ADD TWO DIFFERENT QUANTITY
+    public double additionOfQuantity(double quantityOne, double quantityTwo) {
+        return quantityOne + quantityTwo;
+    }
 }
