@@ -127,4 +127,18 @@ public class QuantityMeasurementTest {
         double yardValue = quantityMeasurement.returnConversionValue(1, Unit.YARD);
         Assert.assertEquals(inchValue, yardValue, 0.0);
     }
+
+    @Test
+    public void givenValueInInch_IfEqualToValueInCentimeter_ShouldReturnTrue() {
+        double inchValue = quantityMeasurement.returnConversionValue(0.4, Unit.INCH);
+        double centimeterValue = quantityMeasurement.returnConversionValue(1, Unit.CENTIMETER);
+        Assert.assertEquals(inchValue, centimeterValue, 0.0);
+    }
+
+    @Test
+    public void givenValueInCentimeter_IfEqualToValueInInch_ShouldReturnTrue() {
+        double inchValue = quantityMeasurement.returnConversionValue(2, Unit.INCH);
+        double centimeterValue = quantityMeasurement.returnConversionValue(5, Unit.CENTIMETER);
+        Assert.assertEquals(inchValue, centimeterValue, 0.0);
+    }
 }
