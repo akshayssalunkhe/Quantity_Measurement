@@ -1,24 +1,34 @@
 package com.bridgelabz;
 
+import java.util.Objects;
+
 public class QuantityMeasurement {
 
-    //METHOD TO RETURN CONVERTED VALUE
-    public double returnConversionValue(double valueToConvert, Unit unitToConvert) {
-        if (unitToConvert.equals(Unit.CELSIUS)) {
-            return ((unitToConvert.type * valueToConvert) + 32);
-        }
-        return (valueToConvert * unitToConvert.type);
+    //FIELD
+    String arg;
+
+    @Override
+    public boolean equals(Object objectToEquate) {
+        if (this == objectToEquate)
+            return true;
+        if (objectToEquate == null || getClass() != objectToEquate.getClass())
+            return false;
+        QuantityMeasurement that = (QuantityMeasurement) objectToEquate;
+        return Objects.equals(arg, that.arg);
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null)
-            return true;
-        if (this.getClass() == obj.getClass())
-            return true;
-        if (obj == this)
-            return true;
-        return super.equals(obj);
+    public int hashCode() {
+        return Objects.hash(arg);
+    }
+
+    //METHOD TO RETURN CONVERTED VALUE
+    public double returnConversionValue(double valueToConvert, Unit unitToConvert) throws QuantityMeasurementException {
+        if (Objects.equals(unitToConvert, null))
+            throw new QuantityMeasurementException("Unit Type Can't Be Null");
+        if (unitToConvert.equals(Unit.CELSIUS))
+            return ((unitToConvert.type * valueToConvert) + 32);
+        return (valueToConvert * unitToConvert.type);
     }
 
     //METHOD TO ADD TWO DIFFERENT QUANTITY
