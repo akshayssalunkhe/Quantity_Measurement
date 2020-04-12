@@ -1,6 +1,9 @@
 package com.bridgelabz;
 
-public class QuantityMeasurementException extends Throwable {
-    public QuantityMeasurementException(String aNull) {
+public class QuantityMeasurementException extends Exception {
+
+    //CONSTRUCTOR
+    public QuantityMeasurementException(String message) {
+        super(message);
     }
 }
