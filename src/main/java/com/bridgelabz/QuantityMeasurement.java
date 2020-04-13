@@ -23,7 +23,9 @@ public class QuantityMeasurement {
     }
 
     //METHOD TO RETURN CONVERTED VALUE
-    public double returnConversionValue(double valueToConvert, Unit unitToConvert) throws QuantityMeasurementException {
+    public double returnConversionValue(double valueToConvert, Unit unitToConvert, Type quantity) throws QuantityMeasurementException {
+        if (!Objects.equals(unitToConvert.quantityType, quantity))
+            throw new QuantityMeasurementException("Unit Type Mismatch");
         if (Objects.equals(unitToConvert, null))
             throw new QuantityMeasurementException("Unit Type Can't Be Null");
         if (unitToConvert.equals(Unit.CELSIUS))
