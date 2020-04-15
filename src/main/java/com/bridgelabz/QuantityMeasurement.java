@@ -3,9 +3,27 @@ package com.bridgelabz;
 import java.util.Objects;
 
 public class QuantityMeasurement {
-
-    //FIELD
+    //FIELDS
     String arg;
+    Unit unit;
+    Type unitType;
+    double conversionUnitValue;
+
+    //PARAMETRISED CONSTRUCTOR
+    public QuantityMeasurement(Unit unitToConvert, double unitValue) {
+        this.unit = unitToConvert;
+        this.unitType = unitToConvert.quantityType;
+        this.conversionUnitValue = getConversionValue(unitValue);
+    }
+
+    //DEFAULT CONSTRUCTOR
+    public QuantityMeasurement() {
+    }
+
+    //METHOD TO GET CONVERSION VALUE
+    private double getConversionValue(double unitValue) {
+        return QuantityMeasurementFactory.getConversionUnit(unitType, unit, unitValue);
+    }
 
     @Override
     public boolean equals(Object objectToEquate) {
@@ -14,7 +32,7 @@ public class QuantityMeasurement {
         if (objectToEquate == null || getClass() != objectToEquate.getClass())
             return false;
         QuantityMeasurement that = (QuantityMeasurement) objectToEquate;
-        return Objects.equals(arg, that.arg);
+        return Double.compare(that.conversionUnitValue, conversionUnitValue) == 0 && unitType == that.unitType;
     }
 
     @Override
@@ -22,19 +40,8 @@ public class QuantityMeasurement {
         return Objects.hash(arg);
     }
 
-    //METHOD TO RETURN CONVERTED VALUE
-    public double returnConversionValue(double valueToConvert, Unit unitToConvert, Type quantity) throws QuantityMeasurementException {
-        if (!Objects.equals(unitToConvert.quantityType, quantity))
-            throw new QuantityMeasurementException("Unit Type Mismatch");
-        if (Objects.equals(unitToConvert, null))
-            throw new QuantityMeasurementException("Unit Type Can't Be Null");
-        if (unitToConvert.equals(Unit.CELSIUS))
-            return ((unitToConvert.type * valueToConvert) + 32);
-        return (valueToConvert * unitToConvert.type);
-    }
-
-    //METHOD TO ADD TWO DIFFERENT QUANTITY
-    public double additionOfQuantity(double quantityOne, double quantityTwo) {
-        return quantityOne + quantityTwo;
+    //METHOD TO ADD QUANTITIES
+    public double addQuantity(QuantityMeasurement firstQuantity, QuantityMeasurement secondQuantity) throws QuantityMeasurementException {
+        return MeasurementOperations.addQuantity(firstQuantity, secondQuantity);
     }
 }

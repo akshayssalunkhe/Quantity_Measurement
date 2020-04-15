@@ -3,8 +3,6 @@ package com.bridgelabz;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.Objects;
-
 import static org.junit.Assert.*;
 
 public class QuantityMeasurementTest {
@@ -14,15 +12,24 @@ public class QuantityMeasurementTest {
 
     @Test
     public void given0FeetAnd0Feet_IfEqual_ShouldReturnTrue() {
-        double valueOne = 0;
-        double valueTwo = 0;
-        try {
-            valueOne = quantityMeasurement.returnConversionValue(1, Unit.FEET, Type.LENGTH);
-            valueTwo = quantityMeasurement.returnConversionValue(1, Unit.FEET, Type.LENGTH);
-        } catch (QuantityMeasurementException e) {
-            e.printStackTrace();
-        }
-        assertEquals(valueOne, valueTwo, 0.0);
+        QuantityMeasurement firstFeetQuantity = new QuantityMeasurement(Unit.FEET, 0);
+        QuantityMeasurement secondFeetQuantity = new QuantityMeasurement(Unit.FEET, 0);
+        Assert.assertEquals(firstFeetQuantity, secondFeetQuantity);
+    }
+
+    @Test
+    public void givenFeetValueConvertToInch_ShouldReturnEqual() {
+        QuantityMeasurement firstFeetQuantity = new QuantityMeasurement(Unit.FEET, 1);
+        QuantityMeasurement secondFeetQuantity = new QuantityMeasurement(Unit.INCH, 12);
+        Assert.assertEquals(firstFeetQuantity, secondFeetQuantity);
+    }
+
+    @Test
+    public void givenLengthAndVolume_WhenAdd_ThenThrowException() {
+        QuantityMeasurement firstQuantity = new QuantityMeasurement(Unit.FEET, 1);
+        QuantityMeasurement secQuantity = new QuantityMeasurement(Unit.LITRE, 1);
+        boolean equalityCheck = firstQuantity.equals(secQuantity);
+        Assert.assertFalse(equalityCheck);
     }
 
     @Test
@@ -48,28 +55,18 @@ public class QuantityMeasurementTest {
 
     @Test
     public void givenValueCheck_IfEqual_ShouldReturnTrue() {
-        double valueOne = 0;
-        double valueTwo = 0;
-        try {
-            valueOne = quantityMeasurement.returnConversionValue(2.2, Unit.FEET, Type.VOLUME);
-            valueTwo = quantityMeasurement.returnConversionValue(2.2, Unit.FEET, Type.VOLUME);
-        } catch (QuantityMeasurementException e) {
-            e.printStackTrace();
-        }
-        assertEquals(valueOne, valueTwo, 0.0);
+        QuantityMeasurement firstFeetQuantity = new QuantityMeasurement(Unit.FEET, 1);
+        QuantityMeasurement secondFeetQuantity = new QuantityMeasurement(Unit.FEET, 1);
+        boolean equalityCheck = firstFeetQuantity.equals(secondFeetQuantity);
+        assertTrue(equalityCheck);
     }
 
     @Test
     public void given0InchAnd0Inch_IfEqual_ShouldReturnTrue() {
-        double valueOne = 0;
-        double valueTwo = 0;
-        try {
-            valueOne = quantityMeasurement.returnConversionValue(0, Unit.INCH, Type.LENGTH);
-            valueTwo = quantityMeasurement.returnConversionValue(0, Unit.INCH, Type.LENGTH);
-        } catch (QuantityMeasurementException e) {
-            e.printStackTrace();
-        }
-        assertEquals(valueOne, valueTwo, 0.0);
+        QuantityMeasurement firstInchQuantity = new QuantityMeasurement(Unit.INCH, 0);
+        QuantityMeasurement secondInchQuantity = new QuantityMeasurement(Unit.INCH, 0);
+        boolean equalityCheck = firstInchQuantity.equals(secondInchQuantity);
+        assertTrue(equalityCheck);
     }
 
     @Test
@@ -95,451 +92,304 @@ public class QuantityMeasurementTest {
 
     @Test
     public void givenValueCheckForInch_IfEqual_ShouldReturnTrue() {
-        double valueOne = 0;
-        double valueTwo = 0;
-        try {
-            valueOne = quantityMeasurement.returnConversionValue(2.2, Unit.INCH, Type.LENGTH);
-            valueTwo = quantityMeasurement.returnConversionValue(2.2, Unit.INCH, Type.LENGTH);
-        } catch (QuantityMeasurementException e) {
-            e.printStackTrace();
-        }
-        assertEquals(valueOne, valueTwo, 0.0);
+        QuantityMeasurement firstInchQuantity = new QuantityMeasurement(Unit.FEET, 1);
+        QuantityMeasurement secondInchQuantity = new QuantityMeasurement(Unit.FEET, 1);
+        boolean equalityCheck = firstInchQuantity.equals(secondInchQuantity);
+        assertTrue(equalityCheck);
     }
 
     @Test
-    public void givenValueInFeet_ShouldReturnValueInInches() {
-        double inchValue = 0;
-        try {
-            inchValue = quantityMeasurement.returnConversionValue(1, Unit.FEET, Type.LENGTH);
-        } catch (QuantityMeasurementException e) {
-            e.printStackTrace();
-        }
-        Assert.assertEquals(12, inchValue, 0.0);
+    public void givenValueInFeet_whenEqualToEquivalentInch_ShouldReturnTrue() {
+        QuantityMeasurement feetQuantity = new QuantityMeasurement(Unit.FEET, 1);
+        QuantityMeasurement inchQuantity = new QuantityMeasurement(Unit.INCH, 12);
+        boolean equalityCheck = feetQuantity.equals(inchQuantity);
+        assertTrue(equalityCheck);
     }
 
     @Test
     public void givenValueInInch_IfEqualToValueInFeet_ShouldReturnTrue() {
-        double inchValue = 0;
-        double feetValue = 0;
-        try {
-            inchValue = quantityMeasurement.returnConversionValue(12, Unit.INCH, Type.LENGTH);
-            feetValue = quantityMeasurement.returnConversionValue(1, Unit.FEET, Type.LENGTH);
-        } catch (QuantityMeasurementException e) {
-            e.printStackTrace();
-        }
-        Assert.assertEquals(inchValue, feetValue, 0.0);
+        QuantityMeasurement inchQuantity = new QuantityMeasurement(Unit.INCH, 12);
+        QuantityMeasurement feetQuantity = new QuantityMeasurement(Unit.FEET, 1);
+        boolean equalityCheck = inchQuantity.equals(feetQuantity);
+        assertTrue(equalityCheck);
     }
 
     @Test
     public void givenValueInFeet_IfEqualToValueInYard_ShouldReturnTrue() {
-        double feetValue = 0;
-        double yardValue = 0;
-        try {
-            feetValue = quantityMeasurement.returnConversionValue(3, Unit.FEET, Type.LENGTH);
-            yardValue = quantityMeasurement.returnConversionValue(1, Unit.YARD, Type.LENGTH);
-        } catch (QuantityMeasurementException e) {
-            e.printStackTrace();
-        }
-        Assert.assertEquals(feetValue, yardValue, 0.0);
+        QuantityMeasurement feetQuantity = new QuantityMeasurement(Unit.FEET, 3);
+        QuantityMeasurement yardQuantity = new QuantityMeasurement(Unit.YARD, 1);
+        boolean equalityCheck = feetQuantity.equals(yardQuantity);
+        assertTrue(equalityCheck);
     }
 
     @Test
     public void givenValueInOneFeet_NotEqualToOneYard_ShouldReturnFalse() {
-        double feetValue = 0;
-        double yardValue = 0;
-        try {
-            feetValue = quantityMeasurement.returnConversionValue(1, Unit.FEET, Type.LENGTH);
-            yardValue = quantityMeasurement.returnConversionValue(1, Unit.YARD, Type.LENGTH);
-        } catch (QuantityMeasurementException e) {
-            e.printStackTrace();
-        }
-        Assert.assertNotEquals(feetValue, yardValue);
+        QuantityMeasurement feetQuantity = new QuantityMeasurement(Unit.FEET, 1);
+        QuantityMeasurement yardQuantity = new QuantityMeasurement(Unit.YARD, 1);
+        boolean equalityCheck = feetQuantity.equals(yardQuantity);
+        assertFalse(equalityCheck);
     }
 
     @Test
     public void givenValueInInch_IfEqualsToValueInYard_ShouldReturnTrue() {
-        double inchValue = 0;
-        double yardValue = 0;
-        try {
-            inchValue = quantityMeasurement.returnConversionValue(36, Unit.INCH, Type.LENGTH);
-            yardValue = quantityMeasurement.returnConversionValue(1, Unit.YARD, Type.LENGTH);
-        } catch (QuantityMeasurementException e) {
-            e.printStackTrace();
-        }
-        Assert.assertEquals(inchValue, yardValue, 0.0);
+        QuantityMeasurement inchQuantity = new QuantityMeasurement(Unit.INCH, 36);
+        QuantityMeasurement yardQuantity = new QuantityMeasurement(Unit.YARD, 1);
+        boolean equalityCheck = inchQuantity.equals(yardQuantity);
+        assertTrue(equalityCheck);
     }
 
     @Test
     public void givenValueOneInch_IfNotEqualToOneYard_ShouldReturnTrue() {
-        double inchValue = 0;
-        double yardValue = 0;
-        try {
-            inchValue = quantityMeasurement.returnConversionValue(1, Unit.INCH, Type.LENGTH);
-            yardValue = quantityMeasurement.returnConversionValue(1, Unit.YARD, Type.LENGTH);
-        } catch (QuantityMeasurementException e) {
-            e.printStackTrace();
-        }
-        Assert.assertNotEquals(inchValue, yardValue);
+        QuantityMeasurement inchQuantity = new QuantityMeasurement(Unit.INCH, 1);
+        QuantityMeasurement yardQuantity = new QuantityMeasurement(Unit.YARD, 1);
+        boolean equalityCheck = inchQuantity.equals(yardQuantity);
+        assertFalse(equalityCheck);
     }
 
     @Test
     public void givenValueInYard_IfEqualToValueInInches_ShouldReturnTrue() {
-        double inchValue = 0;
-        double yardValue = 0;
-        try {
-            inchValue = quantityMeasurement.returnConversionValue(36, Unit.INCH, Type.LENGTH);
-            yardValue = quantityMeasurement.returnConversionValue(1, Unit.YARD, Type.LENGTH);
-        } catch (QuantityMeasurementException e) {
-            e.printStackTrace();
-        }
-        Assert.assertEquals(inchValue, yardValue, 0.0);
+        QuantityMeasurement yardQuantity = new QuantityMeasurement(Unit.YARD, 1);
+        QuantityMeasurement inchQuantity = new QuantityMeasurement(Unit.INCH, 36);
+        boolean equalityCheck = yardQuantity.equals(inchQuantity);
+        assertTrue(equalityCheck);
     }
 
     @Test
     public void givenValueInInch_IfEqualToValueInCentimeter_ShouldReturnTrue() {
-        double inchValue = 0;
-        double centimeterValue = 0;
-        try {
-            inchValue = quantityMeasurement.returnConversionValue(0.4, Unit.INCH, Type.LENGTH);
-            centimeterValue = quantityMeasurement.returnConversionValue(1, Unit.CENTIMETER, Type.LENGTH);
-        } catch (QuantityMeasurementException e) {
-            e.printStackTrace();
-        }
-        Assert.assertEquals(inchValue, centimeterValue, 0.0);
+        QuantityMeasurement inchQuantity = new QuantityMeasurement(Unit.INCH, 1);
+        QuantityMeasurement centimeterQuantity = new QuantityMeasurement(Unit.CENTIMETER, 2.5);
+        boolean euqals = inchQuantity.equals(centimeterQuantity);
+        assertTrue(euqals);
     }
 
     @Test
     public void givenValueInCentimeter_IfEqualToValueInInch_ShouldReturnTrue() {
-        double inchValue = 0;
-        double centimeterValue = 0;
-        try {
-            inchValue = quantityMeasurement.returnConversionValue(2, Unit.INCH, Type.LENGTH);
-            centimeterValue = quantityMeasurement.returnConversionValue(5, Unit.CENTIMETER, Type.LENGTH);
-        } catch (QuantityMeasurementException e) {
-            e.printStackTrace();
-        }
-        Assert.assertEquals(inchValue, centimeterValue, 0.0);
+        QuantityMeasurement centimeterQuantity = new QuantityMeasurement(Unit.CENTIMETER, 5);
+        QuantityMeasurement inchQuantity = new QuantityMeasurement(Unit.INCH, 2);
+        boolean euqals = centimeterQuantity.equals(inchQuantity);
+        assertTrue(euqals);
     }
 
     @Test
     public void given2InchAnd2Inch_WhenAdded_ShouldReturn4Inch() {
-        double additionResult = 0;
+        QuantityMeasurement inchQuantityOne = new QuantityMeasurement(Unit.INCH, 2);
+        QuantityMeasurement inchQuantityTwo = new QuantityMeasurement(Unit.INCH, 2);
         try {
-            double inchValueOne = quantityMeasurement.returnConversionValue(2, Unit.INCH, Type.LENGTH);
-            double inchValueTwo = quantityMeasurement.returnConversionValue(2, Unit.INCH, Type.LENGTH);
-            additionResult = quantityMeasurement.additionOfQuantity(inchValueOne, inchValueTwo);
+            double quantityAddition = inchQuantityOne.addQuantity(inchQuantityOne, inchQuantityTwo);
+            Assert.assertEquals(4, quantityAddition, 0.0);
         } catch (QuantityMeasurementException e) {
             e.printStackTrace();
         }
-        Assert.assertEquals(4, additionResult, 0);
     }
 
     @Test
     public void given1FeetAnd2Inch_WhenAdded_ShouldReturn14Inch() {
-        double additionResult = 0;
+        QuantityMeasurement feetQuantity = new QuantityMeasurement(Unit.FEET, 1);
+        QuantityMeasurement inchQuantity = new QuantityMeasurement(Unit.INCH, 2);
         try {
-            double feetValue = quantityMeasurement.returnConversionValue(1, Unit.FEET, Type.LENGTH);
-            double inchValue = quantityMeasurement.returnConversionValue(2, Unit.INCH, Type.LENGTH);
-            additionResult = quantityMeasurement.additionOfQuantity(feetValue, inchValue);
+            double quantityAddition = inchQuantity.addQuantity(feetQuantity, inchQuantity);
+            Assert.assertEquals(14, quantityAddition, 0.0);
         } catch (QuantityMeasurementException e) {
             e.printStackTrace();
         }
-        Assert.assertEquals(14, additionResult, 0);
     }
 
     @Test
     public void given1FeetAnd1Feet_WhenAdded_ShouldReturn24Inch() {
-        double additionResult = 0;
+        QuantityMeasurement feetQuantityOne = new QuantityMeasurement(Unit.FEET, 1);
+        QuantityMeasurement feetQuantityTwo = new QuantityMeasurement(Unit.FEET, 1);
         try {
-            double feetValueOne = quantityMeasurement.returnConversionValue(1, Unit.FEET, Type.LENGTH);
-            double feetValueTwo = quantityMeasurement.returnConversionValue(1, Unit.FEET, Type.LENGTH);
-            additionResult = quantityMeasurement.additionOfQuantity(feetValueOne, feetValueTwo);
+            double quantityAddition = feetQuantityOne.addQuantity(feetQuantityOne, feetQuantityTwo);
+            Assert.assertEquals(24, quantityAddition, 0.0);
         } catch (QuantityMeasurementException e) {
             e.printStackTrace();
         }
-        Assert.assertEquals(24, additionResult, 0);
     }
 
     @Test
     public void givenInchValueAndCentimeterValue_WhenAdded_ShouldReturnResultInInches() {
-        double additionResult = 0;
+        QuantityMeasurement inchQuantity = new QuantityMeasurement(Unit.INCH, 2);
+        QuantityMeasurement centimeterQuantity = new QuantityMeasurement(Unit.CENTIMETER, 2.5);
         try {
-            double inchValue = quantityMeasurement.returnConversionValue(2, Unit.INCH, Type.LENGTH);
-            double centimeterValue = quantityMeasurement.returnConversionValue(2.5, Unit.CENTIMETER, Type.LENGTH);
-            additionResult = quantityMeasurement.additionOfQuantity(inchValue, centimeterValue);
+            double quantityAddition = inchQuantity.addQuantity(inchQuantity, centimeterQuantity);
+            Assert.assertEquals(3, quantityAddition, 0.0);
         } catch (QuantityMeasurementException e) {
             e.printStackTrace();
         }
-        Assert.assertEquals(3, additionResult, 0);
     }
 
     @Test
-    public void givenValueOneGallon_ShouldReturnEquivalentLitreValue() {
-        double litreValue = 0;
-        try {
-            litreValue = quantityMeasurement.returnConversionValue(1, Unit.GALLON, Type.VOLUME);
-        } catch (QuantityMeasurementException e) {
-            e.printStackTrace();
-        }
-        Assert.assertEquals(3.78, litreValue, 0.0);
+    public void givenValueOneGallon_whenEqualToEquivalentLitreValue_ShouldReturnTrue() {
+        QuantityMeasurement gallonQuantity = new QuantityMeasurement(Unit.GALLON, 1);
+        QuantityMeasurement litreQuantity = new QuantityMeasurement(Unit.LITRE, 3.78);
+        boolean equalityCheck = gallonQuantity.equals(litreQuantity);
+        assertTrue(equalityCheck);
     }
 
     @Test
     public void givenValueOneLitre_ShouldReturnEquivalentLitreValue() {
-        double litreValue = 0;
-        try {
-            litreValue = quantityMeasurement.returnConversionValue(1, Unit.LITRE, Type.VOLUME);
-        } catch (QuantityMeasurementException e) {
-            e.printStackTrace();
-        }
-        Assert.assertEquals(1, litreValue, 0.0);
+        QuantityMeasurement litreQuantityOne = new QuantityMeasurement(Unit.LITRE, 1);
+        QuantityMeasurement litreQuantityTwo = new QuantityMeasurement(Unit.LITRE, 1);
+        boolean equalityCheck = litreQuantityOne.equals(litreQuantityTwo);
+        assertTrue(equalityCheck);
     }
 
     @Test
     public void givenValueOneMillilitre_ShouldReturnEquivalentLitreValue() {
-        double litreValue = 0;
-        try {
-            litreValue = quantityMeasurement.returnConversionValue(1000, Unit.MILLILITRE, Type.VOLUME);
-        } catch (QuantityMeasurementException e) {
-            e.printStackTrace();
-        }
-        Assert.assertEquals(1, litreValue, 0.0);
+        QuantityMeasurement millilitreQuantity = new QuantityMeasurement(Unit.MILLILITRE, 1000);
+        QuantityMeasurement litreQuantity = new QuantityMeasurement(Unit.LITRE, 1);
+        boolean equalityCheck = litreQuantity.equals(millilitreQuantity);
+        assertTrue(equalityCheck);
     }
 
     @Test
-    public void givenValueMillilitre_ShouldReturnEquivalentLitreValue() {
-        double LitreValue = 0;
-        try {
-            LitreValue = quantityMeasurement.returnConversionValue(2000, Unit.MILLILITRE, Type.VOLUME);
-        } catch (QuantityMeasurementException e) {
-            e.printStackTrace();
-        }
-        Assert.assertEquals(2, LitreValue, 0.0);
+    public void givenValueMillilitre_whenEqualToEquivalentLitreValue_ShouldReturnTrue() {
+        QuantityMeasurement millilitreQuantity = new QuantityMeasurement(Unit.MILLILITRE, 5000);
+        QuantityMeasurement litreQuantity = new QuantityMeasurement(Unit.LITRE, 5);
+        boolean equalityCheck = litreQuantity.equals(millilitreQuantity);
+        assertTrue(equalityCheck);
     }
 
     @Test
     public void givenValueInGallonAndLitre_WhenAdded_ShouldReturnValueInLitre() {
-        double additionResult = 0;
+        QuantityMeasurement gallonQuantity = new QuantityMeasurement(Unit.GALLON, 1);
+        QuantityMeasurement litreQuantity = new QuantityMeasurement(Unit.LITRE, 1);
         try {
-            double gallonValue = quantityMeasurement.returnConversionValue(1, Unit.GALLON, Type.VOLUME);
-            double litreValue = quantityMeasurement.returnConversionValue(3.78, Unit.LITRE, Type.VOLUME);
-            additionResult = quantityMeasurement.additionOfQuantity(gallonValue, litreValue);
+            double quantityAddition = gallonQuantity.addQuantity(gallonQuantity, litreQuantity);
+            Assert.assertEquals(4.779999999999999, quantityAddition, 0.0);
         } catch (QuantityMeasurementException e) {
             e.printStackTrace();
         }
-        Assert.assertEquals(7.56, additionResult, 0);
     }
 
     @Test
     public void givenValueInLitreAndMillilitre_WhenAdded_ShouldReturnValueInLitre() {
-
-        double additionResult = 0;
+        QuantityMeasurement millilitreQuantity = new QuantityMeasurement(Unit.MILLILITRE, 1000);
+        QuantityMeasurement litreQuantity = new QuantityMeasurement(Unit.LITRE, 1);
         try {
-            double millilitreValue = quantityMeasurement.returnConversionValue(1000, Unit.MILLILITRE, Type.VOLUME);
-            double litreValue = quantityMeasurement.returnConversionValue(1, Unit.LITRE, Type.VOLUME);
-            additionResult = quantityMeasurement.additionOfQuantity(millilitreValue, litreValue);
+            double quantityAddition = millilitreQuantity.addQuantity(millilitreQuantity, litreQuantity);
+            Assert.assertEquals(2, quantityAddition, 0.0);
         } catch (QuantityMeasurementException e) {
             e.printStackTrace();
         }
-        Assert.assertEquals(2, additionResult, 0);
     }
 
     @Test
-    public void givenValue1000Grams_ShouldReturnEquivalentKilogramValue() {
-        double kilogramValue = 0;
+    public void givenValue1000Grams_IfEqualToEquivalentKilogramValue_ShouldReturnTrue() {
+        QuantityMeasurement gramQuantity = new QuantityMeasurement(Unit.GRAMS, 1000);
+        QuantityMeasurement kilogramQuantity = new QuantityMeasurement(Unit.KILOGRAM, 1);
         try {
-            kilogramValue = quantityMeasurement.returnConversionValue(1000, Unit.GRAM, Type.WEIGHT);
+            double quantityAddition = gramQuantity.addQuantity(gramQuantity, kilogramQuantity);
+            Assert.assertEquals(2, quantityAddition, 0.0);
         } catch (QuantityMeasurementException e) {
             e.printStackTrace();
         }
-        Assert.assertEquals(1, kilogramValue, 0.0);
     }
 
     @Test
     public void givenValue1Kilograms_ShouldReturnEquivalentKilogramValue() {
-        double kilogramValue = 0;
-        try {
-            kilogramValue = quantityMeasurement.returnConversionValue(1, Unit.KILOGRAM, Type.WEIGHT);
-        } catch (QuantityMeasurementException e) {
-            e.printStackTrace();
-        }
-        Assert.assertEquals(1, kilogramValue, 0.0);
+        QuantityMeasurement kilogramQuantityOne = new QuantityMeasurement(Unit.KILOGRAM, 1);
+        QuantityMeasurement kilogramQuantityTwo = new QuantityMeasurement(Unit.KILOGRAM, 1);
+        boolean equalityCheck = kilogramQuantityOne.equals(kilogramQuantityTwo);
+        assertTrue(equalityCheck);
     }
 
     @Test
     public void givenValue1Tonne_ShouldReturnEquivalentKilogramValue() {
-        double kilogramValue = 0;
-        try {
-            kilogramValue = quantityMeasurement.returnConversionValue(1, Unit.TONNE, Type.WEIGHT);
-        } catch (QuantityMeasurementException e) {
-            e.printStackTrace();
-        }
-        Assert.assertEquals(1000, kilogramValue, 0.0);
+        QuantityMeasurement tonneQuantityOne = new QuantityMeasurement(Unit.TONNE, 1);
+        QuantityMeasurement kilogramQuantity = new QuantityMeasurement(Unit.KILOGRAM, 1000);
+        boolean equalityCheck = tonneQuantityOne.equals(kilogramQuantity);
+        assertTrue(equalityCheck);
     }
 
     @Test
     public void givenValueInTonneAndGram_WhenAdded_ShouldReturnEquivalentKilogramValue() {
-        double additionResult = 0;
+        QuantityMeasurement tonneQuantity = new QuantityMeasurement(Unit.TONNE, 1);
+        QuantityMeasurement gramQuantity = new QuantityMeasurement(Unit.GRAMS, 1000);
         try {
-            double tonneValue = quantityMeasurement.returnConversionValue(1, Unit.TONNE, Type.WEIGHT);
-            double gramValue = quantityMeasurement.returnConversionValue(1000, Unit.GRAM, Type.WEIGHT);
-            additionResult = quantityMeasurement.additionOfQuantity(tonneValue, gramValue);
+            double quantityAddition = tonneQuantity.addQuantity(tonneQuantity, gramQuantity);
+            Assert.assertEquals(1001, quantityAddition, 0.0);
         } catch (QuantityMeasurementException e) {
             e.printStackTrace();
         }
-        Assert.assertEquals(1001, additionResult, 0);
     }
 
     @Test
     public void givenValueTemperature0_WhenCompare_ShouldReturnEqual() {
-        double temperatureOne = 0;
-        double temperatureTwo = 0;
-        try {
-            temperatureOne = quantityMeasurement.returnConversionValue(0, Unit.CELSIUS, Type.TEMPERATURE);
-            temperatureTwo = quantityMeasurement.returnConversionValue(0, Unit.CELSIUS, Type.TEMPERATURE);
-
-        } catch (QuantityMeasurementException e) {
-            e.printStackTrace();
-        }
-        Assert.assertEquals(temperatureOne, temperatureTwo, 0);
+        QuantityMeasurement temperatureOne = new QuantityMeasurement(Unit.CELSIUS, 0);
+        QuantityMeasurement temperatureTwo = new QuantityMeasurement(Unit.CELSIUS, 0);
+        boolean equalityCheck = temperatureOne.equals(temperatureTwo);
+        assertTrue(equalityCheck);
     }
 
     @Test
     public void givenTemperature_WhenCompare_ShouldReturnEqual() {
-        double temperatureOne = 0;
-        double temperatureTwo = 0;
-        try {
-            temperatureOne = quantityMeasurement.returnConversionValue(212, Unit.FAHRENHEIT, Type.TEMPERATURE);
-            temperatureTwo = quantityMeasurement.returnConversionValue(100, Unit.CELSIUS, Type.TEMPERATURE);
-        } catch (QuantityMeasurementException e) {
-            e.printStackTrace();
-        }
-        Assert.assertEquals(temperatureOne, temperatureTwo, 0);
+        QuantityMeasurement temperatureOne = new QuantityMeasurement(Unit.CELSIUS, 35);
+        QuantityMeasurement temperatureTwo = new QuantityMeasurement(Unit.CELSIUS, 35);
+        boolean equalityCheck = temperatureOne.equals(temperatureTwo);
+        assertTrue(equalityCheck);
     }
 
     @Test
-    public void givenTemperature0CelsiusAnd0Fahrenheit_whenEquate_ShouldReturnNotEqual() {
-        double temperatureValueOne = 0;
-        double temperatureValueTwo = 0;
-        try {
-            temperatureValueOne = quantityMeasurement.returnConversionValue(0, Unit.CELSIUS, Type.TEMPERATURE);
-            temperatureValueTwo = quantityMeasurement.returnConversionValue(0, Unit.FAHRENHEIT, Type.TEMPERATURE);
-        } catch (QuantityMeasurementException e) {
-            e.printStackTrace();
-        }
-        Assert.assertNotEquals(temperatureValueTwo, temperatureValueOne, 0);
+    public void givenTemperature0CelsiusAnd0Fahrenheit_whenEquate_ShouldReturnFalse() {
+        QuantityMeasurement temperatureOne = new QuantityMeasurement(Unit.CELSIUS, 0);
+        QuantityMeasurement temperatureTwo = new QuantityMeasurement(Unit.FAHRENHEIT, 0);
+        boolean equalityCheck = temperatureOne.equals(temperatureTwo);
+        assertFalse(equalityCheck);
     }
 
     @Test
     public void givenTemperatureInFahrenheit_ShouldReturnEquivalentTemperatureInFahrenheit() {
-        double temperatureValue = 0;
-        try {
-            temperatureValue = quantityMeasurement.returnConversionValue(35, Unit.FAHRENHEIT, Type.TEMPERATURE);
-            Assert.assertEquals(35, temperatureValue, 0);
-        } catch (QuantityMeasurementException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Test
-    public void givenTemperatureInFahrenheitButWithDifferentType_ShouldThrowCustomException() {
-        double temperatureValue = 0;
-        try {
-            temperatureValue = quantityMeasurement.returnConversionValue(35, Unit.FAHRENHEIT, Type.VOLUME);
-            Assert.assertEquals(35, temperatureValue, 0);
-        } catch (QuantityMeasurementException e) {
-            e.printStackTrace();
-        }
+        QuantityMeasurement temperatureOne = new QuantityMeasurement(Unit.FAHRENHEIT, 10);
+        QuantityMeasurement temperatureTwo = new QuantityMeasurement(Unit.FAHRENHEIT, 10);
+        boolean equalityCheck = temperatureOne.equals(temperatureTwo);
+        assertTrue(equalityCheck);
     }
 
     @Test
     public void givenValueTwoDifferentUnits_ToCompare_ShouldReturnFalse() {
-        double valueOne = 0;
-        double valueTwo = 0;
-        try {
-            valueOne = quantityMeasurement.returnConversionValue(2, Unit.FEET, Type.LENGTH);
-            valueTwo = quantityMeasurement.returnConversionValue(2.2, Unit.LITRE, Type.VOLUME);
-            boolean result = Objects.equals(valueOne, valueTwo);
-            assertFalse(result);
-        } catch (QuantityMeasurementException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Test
-    public void givenTwoDifferentUnits_ToCompare_ShouldReturnCustomException() {
-        try {
-            double result = quantityMeasurement.returnConversionValue(35, Unit.FAHRENHEIT, Type.LENGTH);
-        } catch (QuantityMeasurementException e) {
-            e.printStackTrace();
-        }
+        QuantityMeasurement quantityOne = new QuantityMeasurement(Unit.LITRE, 10);
+        QuantityMeasurement quantityTwo = new QuantityMeasurement(Unit.FAHRENHEIT, 10);
+        boolean equalityCheck = quantityOne.equals(quantityTwo);
+        assertFalse(equalityCheck);
     }
 
     @Test
     public void givenTemperature0CelsiusAnd0Fahrenheit_whenAdded_ShouldReturnResult() {
-        double temperatureValueOne = 0;
-        double temperatureValueTwo = 0;
-        double additionResult = 0;
+        double quantityAddition = 0;
+        QuantityMeasurement temperatureOne = new QuantityMeasurement(Unit.CELSIUS, 0);
+        QuantityMeasurement temperatureTwo = new QuantityMeasurement(Unit.FAHRENHEIT, 0);
         try {
-            temperatureValueOne = quantityMeasurement.returnConversionValue(0, Unit.CELSIUS, Type.TEMPERATURE);
-            temperatureValueTwo = quantityMeasurement.returnConversionValue(0, Unit.FAHRENHEIT, Type.TEMPERATURE);
-            additionResult = quantityMeasurement.additionOfQuantity(temperatureValueOne, temperatureValueTwo);
-        } catch (QuantityMeasurementException e) {
-            e.printStackTrace();
-        }
-        Assert.assertEquals(32, additionResult, 0);
-    }
-
-    @Test
-    public void givenTemperature0CelsiusAnd0Celsius_whenAdded_ShouldReturnResult()  {
-        double temperatureValueOne = 0;
-        double temperatureValueTwo = 0;
-        double additionResult = 0;
-        try {
-            temperatureValueOne = quantityMeasurement.returnConversionValue(0, Unit.CELSIUS, Type.TEMPERATURE);
-            temperatureValueTwo = quantityMeasurement.returnConversionValue(0, Unit.CELSIUS, Type.TEMPERATURE);
-            additionResult = quantityMeasurement.additionOfQuantity(temperatureValueOne, temperatureValueTwo);
-        } catch (QuantityMeasurementException e) {
-            e.printStackTrace();
-        }
-        try {
-            if (additionResult > 0)
-                throw new QuantityMeasurementException("0 Celsius Can Not Be Added");
-            Assert.assertEquals(0, additionResult, 0);
+            quantityAddition = temperatureOne.addQuantity(temperatureOne, temperatureTwo);
+            Assert.assertEquals(1001, quantityAddition, 0.0);
         } catch (QuantityMeasurementException e) {
             e.printStackTrace();
         }
     }
 
     @Test
-    public void givenTemperatureCelsiusAndCelsius_whenAdded_ShouldReturnFalse() {
-        double temperatureValueOne = 0;
-        double temperatureValueTwo = 0;
-        double additionResult = 0;
-        boolean result = true;
+    public void givenTemperature0CelsiusAnd0Celsius_whenAdded_ShouldThrowCustomException() {
+        double quantityAddition = 0;
+        QuantityMeasurement temperatureOne = new QuantityMeasurement(Unit.CELSIUS, 0);
+        QuantityMeasurement temperatureTwo = new QuantityMeasurement(Unit.CELSIUS, 0);
         try {
-            temperatureValueOne = quantityMeasurement.returnConversionValue(35, Unit.CELSIUS, Type.TEMPERATURE);
-            temperatureValueTwo = quantityMeasurement.returnConversionValue(35, Unit.CELSIUS, Type.TEMPERATURE);
-            additionResult = quantityMeasurement.additionOfQuantity(temperatureValueOne, temperatureValueTwo);
-            result = Objects.equals(70, additionResult);
+            quantityAddition = temperatureOne.addQuantity(temperatureOne, temperatureTwo);
+            Assert.assertEquals(0, quantityAddition, 0.0);
         } catch (QuantityMeasurementException e) {
             e.printStackTrace();
         }
-        assertFalse(result);
     }
 
     @Test
-    public void givenTemperatureInFahrenheit_whenAdded_ShouldReturnResult() {
-        double temperatureValueOne = 0;
-        double temperatureValueTwo = 0;
-        double additionResult = 0;
+    public void givenTemperatureInFahrenheit_whenAdded_ShouldThrowException() {
+        double quantityAddition = 0;
+        QuantityMeasurement temperatureOne = new QuantityMeasurement(Unit.FAHRENHEIT, 34);
+        QuantityMeasurement temperatureTwo = new QuantityMeasurement(Unit.FAHRENHEIT, 55);
         try {
-            temperatureValueOne = quantityMeasurement.returnConversionValue(40, Unit.FAHRENHEIT, Type.TEMPERATURE);
-            temperatureValueTwo = quantityMeasurement.returnConversionValue(35, Unit.FAHRENHEIT, Type.TEMPERATURE);
-            additionResult = quantityMeasurement.additionOfQuantity(temperatureValueOne, temperatureValueTwo);
+            quantityAddition = temperatureOne.addQuantity(temperatureOne, temperatureTwo);
+            Assert.assertEquals(1001, quantityAddition, 0.0);
         } catch (QuantityMeasurementException e) {
             e.printStackTrace();
         }
-        Assert.assertEquals(75, additionResult, 0);
     }
 }
